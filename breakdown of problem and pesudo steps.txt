@@ -1,0 +1,61 @@
+Understanding the Subarray Sum Equals K problem
+
+The Subarray Subarray Equals K problem is where we are given an array of integers, and the task is to find the total number of continuous subarrays whos sum equals a given integer of k
+Key Points:
+- A subarray is a contiguous part of the array
+- The array can have both positive and negative integers.
+- The solution should efficiently handle arrays of varying sizes.
+
+
+
+Strategy:
+
+We could try a brute force approach, whcih considers all possible subarrays and checks their sum, but the timecomplexity of this method is O(n^2), which is a problem for large arrays.
+Another approach that is efficent involves using a cumulative sum apprach along with a hashmap to track the sum frequencies. The key idea is to maintain a running sum as we iterate through the array.
+We would use the has map to store how many times a particular sum has occurred. This way, we can determine if there.
+
+
+
+Detailed Pseudo Steps
+
+Initialize Variables
+
+count = 0: To store the total number of subarrays that sum up to k.
+cumulativeSum = 0: To keep track of the cumulative sum of elements from the start of the array.
+sumFrequency = {0: 1}: A hash map (dictionary) to store the frequency of cumulative sums. Initialized with 0: 1 because a cumulative sum of 0 has occurred once (conceptual placeholder for calculating subarray sums starting from the first element).
+Iterate Through the Array
+
+For each element num in the array, add num to cumulativeSum.
+Compute desiredSum = cumulativeSum - k. This is the sum that, if exists in our records (sumFrequency), indicates a subarray summing to k.
+If desiredSum is found in sumFrequency, add its frequency to count. This step accounts for multiple subarrays ending at the current index which sum to k.
+Update sumFrequency with the current cumulativeSum.
+If cumulativeSum is not in sumFrequency, add it with a frequency of 1.
+If cumulativeSum is already in sumFrequency, increment its frequency by 1.
+Return the Result
+
+After iterating through the array, count will hold the total number of continuous subarrays whose sum equals k. Return count.
+
+
+tldr steps;
+
+function findSubarraySumEqualsK(array, k):
+    count = 0
+    cumulativeSum = 0
+    sumFrequency = {0: 1}
+    
+    for num in array:
+        cumulativeSum += num
+        desiredSum = cumulativeSum - k
+        
+        if desiredSum in sumFrequency:
+            count += sumFrequency[desiredSum]
+        
+        if cumulativeSum in sumFrequency:
+            sumFrequency[cumulativeSum] += 1
+        else:
+            sumFrequency[cumulativeSum] = 1
+    
+    return count
+
+This algo efficiently solves the problem by maintaining a running sum and leveraging a hashmap to track the occurrences of sums, allowing us to check for the existence of the wanted sum in constant time.
+This appoach drastically reduces the time complexity to O(n), where n is the number of elements in the array.
