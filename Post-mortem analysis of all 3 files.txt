@@ -1,0 +1,52 @@
+Post-mortem analysis of all 3 files
+
+
+Similarities
+Core algorithm: All three files utilize the same core algorithm involving a running cumulative sum and a hash map (std::unordered_map) to track the frequencies of these sums.
+This approach allows for an O(n) solution by leveraging the fact that finding a pervious cumulative sums that differs from the current one by k indicates a subarray sum of k.
+Data Structures: They all use std::vector<int> for storing the integers and std::unnordered_map<long long, int> for mapping cumulative sums to their frequencies.
+Cumulative Sum Technique: Each program calculates a running cumulative sum that iterates through the array of integers, using this sum to identify subarrays that sum to k.
+
+
+
+Differences:
+
+The first files operates on a statically defined small array to demonstrate the purpose.
+The two other files have a function that generates large data set of random integers using the std::random_device and std::mt19937 for their tests of 10 and 50 million integers.
+
+Handling Large Counts:
+
+The first file is not a very large data set so no real large counts need to be addressed, and just demonstrate an easy to follow test.
+The other two files have a function to return long long instead of int to handle large numbers, the 50 million integers gives a demonstation of how to use long long to avoid problems with large integers.
+
+Performance measured:
+
+Performance timing using std::chrono is used in the files designed for larger datasets of my 10 and 50 mil integer test, allowing for an analysis of the algorithm's efficiency on extensive data.
+This feature is not present in the basic demonstration file.
+
+
+
+Final Thoughts:
+
+Objective: the goal wass to show and evaluate an efficent soultion to the subarray sum equals k problem.
+
+Findings: The core algo based on cumulative sums and a hash map tracking frequencies is highly effective, offering O(n) time complexity.
+For large datasets, special consideration using different data types, use long long for large counts and performance measurments is necessary.
+Random data generation and timing mechanisims are important for evaluating the algorithm's performance under different conditions and scales.
+
+Lessons:
+
+Data Type Consideration: The importance of selecting the right data type to avoid overflow and accurately represent large values.
+Performance Optimization: The necessity of efficient algos O(n) vs O(n^2) becomes more apparent as the dataset size grows and the test time increases.
+Scalability: Solutions are not just good enough to be correct, but also scalable to handle real-world datasets that can be vast.
+
+
+
+Final Thoughts:
+
+Any large data set should use long long preemptively or another suitable data type.
+More performance test measurements into the testing pahse to see scalability and efficiency.
+Consider edge cases and test with both small and large datasets to make sure the robustness of the algo.
+
+The subarray sum equals k shows how algo design and Optimization principles relevant to real-world apps. The prograssion from my simple example to 50 mil integers demonstrates the importanfce of efficent algos
+and thoughtful consideration of data types ad performance in sofwaredevelopment.
